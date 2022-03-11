@@ -1,7 +1,7 @@
 {
-  "name": "egg-mongoose",
-  "version": "3.3.1",
-  "description": "egg mongoose plugin",
+  "name": "egg-mongoose-plus",
+  "version": "3.3.3",
+  "description": "egg mongoose plus baseed egg-mongoose",
   "eggPlugin": {
     "name": "mongoose"
   },
@@ -13,11 +13,11 @@
     "egg-plugin"
   ],
   "dependencies": {
-    "@types/mongoose": "^5.3.24",
     "await-first": "^1.0.0",
-    "mongoose": "^5.10.9"
+    "mongoose": "^6.2.5"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.11.97",
     "autod": "^3.0.1",
     "bluebird": "^3.5.1",
     "dotenv": "^7.0.0",
@@ -59,5 +59,13 @@
   },
   "bugs": {
     "url": "https://github.com/eggjs/egg/issues"
-  }
+  },
+  "homepage": "https://github.com/eggjs/egg-mongoose#readme",
+  "main": ".autod.conf.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "author": "wtone",
+  "license": "ISC"
 }

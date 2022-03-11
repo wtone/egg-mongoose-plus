@@ -24,7 +24,7 @@ Egg's mongoose plugin.
 ## Install
 
 ```bash
-$ npm i egg-mongoose --save
+$ npm i egg-mongoose-plus --save
 ```
 
 ## Configuration
@@ -34,7 +34,7 @@ Change `{app_root}/config/plugin.js` to enable `egg-mongoose` plugin:
 ```js
 exports.mongoose = {
   enable: true,
-  package: 'egg-mongoose',
+  package: 'egg-mongoose-plus',
 };
 ```
 
@@ -49,6 +49,13 @@ exports.mongoose = {
   options: {},
   // mongoose global plugins, expected a function or an array of function and options
   plugins: [createdPlugin, [updatedPlugin, pluginOptions]],
+  model: {
+    loadModel: true, //是否自动加载模型文件
+
+    //当需要与sequelize同时使用时，必须修改下方两项配置，否则会与sequelize不兼容,而报错
+    name: "mongoModel", //加载的模型文件挂载到app对象的属性名，默认是model，如果想与sequelize同时使用，最好单独定义一个名字（sequelize默认挂载app属性名就是model）
+    path: "app/mongodb" //模型文件路径，相对于项目跟目录的路径，默认是app/model,如果想与sequelize同时使用，最好单独定义一个路径（sequelize默认模型路径就是app/model）
+  },
 };
 // recommended
 exports.mongoose = {
@@ -57,6 +64,13 @@ exports.mongoose = {
     options: {},
     // mongoose global plugins, expected a function or an array of function and options
     plugins: [createdPlugin, [updatedPlugin, pluginOptions]],
+    model: {
+      loadModel: true, //是否自动加载模型文件
+
+      //当需要与sequelize同时使用时，必须修改下方两项配置，否则会与sequelize不兼容,而报错
+      name: "mongoModel", //加载的模型文件挂载到app对象的属性名，默认是model，如果想与sequelize同时使用，最好单独定义一个名字（sequelize默认挂载app属性名就是model）
+      path: "app/mongodb" //模型文件路径，相对于项目跟目录的路径，默认是app/model,如果想与sequelize同时使用，最好单独定义一个路径（sequelize默认模型路径就是app/model）
+    },
   },
 };
 ```
@@ -64,7 +78,7 @@ exports.mongoose = {
 ### Example
 
 ```js
-// {app_root}/app/model/user.js
+// {app_root}/app/mongodb/user.js
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
@@ -79,7 +93,7 @@ module.exports = app => {
 
 // {app_root}/app/controller/user.js
 exports.index = function* (ctx) {
-  ctx.body = yield ctx.model.User.find({});
+  ctx.body = yield this.app.mongoModel.User.find({});
 }
 ```
 
@@ -104,14 +118,21 @@ exports.mongoose = {
     },
   },
   // public scope plugin array
-  plugins: []
+  plugins: [],
+  model: {
+    loadModel: true, //是否自动加载模型文件
+
+    //当需要与sequelize同时使用时，必须修改下方两项配置，否则会与sequelize不兼容,而报错
+    name: "mongoModel", //加载的模型文件挂载到app对象的属性名，默认是model，如果想与sequelize同时使用，最好单独定义一个名字（sequelize默认挂载app属性名就是model）
+    path: "app/mongodb" //模型文件路径，相对于项目跟目录的路径，默认是app/model,如果想与sequelize同时使用，最好单独定义一个路径（sequelize默认模型路径就是app/model）
+  },
 };
 ```
 
 ### Example
 
 ```js
-// {app_root}/app/model/user.js
+// {app_root}/app/mongodb/user.js
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
@@ -125,7 +146,7 @@ module.exports = app => {
   return conn.model('User', UserSchema);
 }
 
-// {app_root}/app/model/book.js
+// {app_root}/app/mongodb/book.js
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
@@ -140,12 +161,12 @@ module.exports = app => {
 
 // app/controller/user.js
 exports.index = function* (ctx) {
-  ctx.body = yield ctx.model.User.find({}); // get data from db1
+  ctx.body = yield this.app.mongoModel.User.find({}); // get data from db1
 }
 
 // app/controller/book.js
 exports.index = function* (ctx) {
-  ctx.body = yield ctx.model.Book.find({}); // get data from db2
+  ctx.body = yield this.app.mongoModel.Book.find({}); // get data from db2
 }
 ```
 
@@ -162,6 +183,13 @@ exports.mongoose = {
     url: 'mongodb://mongosA:27501,mongosB:27501',
     options: {
       mongos: true,
+    },
+    model: {
+      loadModel: true, //是否自动加载模型文件
+
+      //当需要与sequelize同时使用时，必须修改下方两项配置，否则会与sequelize不兼容,而报错
+      name: "mongoModel", //加载的模型文件挂载到app对象的属性名，默认是model，如果想与sequelize同时使用，最好单独定义一个名字（sequelize默认挂载app属性名就是model）
+      path: "app/mongodb" //模型文件路径，相对于项目跟目录的路径，默认是app/model,如果想与sequelize同时使用，最好单独定义一个路径（sequelize默认模型路径就是app/model）
     },
   },
 };
