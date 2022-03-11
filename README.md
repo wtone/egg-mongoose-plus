@@ -19,7 +19,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-mongoose.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-mongoose
 
-Egg's mongoose plugin.
+Egg's mongoose plus.  允许eggjs项目中同时使用sequelize 和mongoose 的数据库服务
 
 ## Install
 

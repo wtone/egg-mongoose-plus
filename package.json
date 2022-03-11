@@ -1,6 +1,6 @@
 {
   "name": "egg-mongoose-plus",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "description": "egg mongoose plus baseed egg-mongoose",
   "eggPlugin": {
     "name": "mongoose"
@@ -55,12 +55,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eggjs/egg-mongoose.git"
+    "url": "git+https://github.com/wtone/egg-mongoose-plus.git"
   },
   "bugs": {
-    "url": "https://github.com/eggjs/egg/issues"
+    "url": "https://github.com/wtone/egg-mongoose-plus/issues"
   },
-  "homepage": "https://github.com/eggjs/egg-mongoose#readme",
+  "homepage": "https://github.com/wtone/egg-mongoose-plus/issues#readme",
   "main": ".autod.conf.js",
   "directories": {
     "lib": "lib",
